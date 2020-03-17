@@ -1,5 +1,5 @@
 {
-    "name": "bewarhizirvan/laravelgrid",
+    "name": "bewarhizirvan/laravel-grid",
     "description": "A Grid Table Generator for Laravel",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "homepage": "https://hizirvan.app"
         }
     ],
-    "homepage": "https://github.com/bewarhizirvan/laravelgrid",
+    "homepage": "https://github.com/bewarhizirvan/laravel-grid",
     "keywords": ["Laravel", "LaravelGrid"],
     "require": {
         "illuminate/support": "~5|~6"

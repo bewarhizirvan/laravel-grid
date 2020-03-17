@@ -32,6 +32,7 @@ class LaravelGridServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/laravelgrid.php', 'laravelgrid');
+        $this->loadViewsFrom(__DIR__.'/views', 'laravelgrid');
 
         // Register the service the package provides.
         $this->app->singleton('laravelgrid', function ($app) {
@@ -48,7 +49,7 @@ class LaravelGridServiceProvider extends ServiceProvider
     {
         return ['laravelgrid'];
     }
-    
+
     /**
      * Console-specific booting.
      *

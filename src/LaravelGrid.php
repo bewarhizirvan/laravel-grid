@@ -26,7 +26,7 @@ class LaravelGrid
     protected $input;
     protected $total = null;
     protected $CheckPerm = null;
-    protected $paginate = 10;
+    protected $paginate = 50;
     protected $headerCounter = true;
     protected $footerCounter = true;
     protected $paginateClass = "pagination";

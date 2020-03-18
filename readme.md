@@ -23,7 +23,7 @@ $grid = new \BewarHizirvan\LaravelGrid\LaravelGrid($parameters);
 ```
 $parameters must be an array and is optional, all keys are optional
 >checkClass  : Authorization Class must have can() function  
->paginate	: Rows per Page (default: 10)  
+>paginate	: Rows per Page (default: 50)  
 >provider	: Model  
 >dir    : Grid direction { right, left (default) }  
 >label	: Label at the top of Grid  

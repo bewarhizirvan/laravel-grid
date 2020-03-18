@@ -11,11 +11,62 @@ This is where your description should go. Take a look at [contributing.md](contr
 
 Via Composer
 
-``` bash
+```bash
 $ composer require bewarhizirvan/laravel-grid
 ```
 
 ## Usage
+
+For initiating new grid
+```php
+$grid = new \BewarHizirvan\LaravelGrid\LaravelGrid($parameters);
+```
+$parameters must be an array and is optional, all keys are optional
+>checkClass  : Authorization Class must have can() function  
+>paginate	: Rows per Page (default: 10)  
+>provider	: Model  
+>dir    : Grid direction { right, left (default) }  
+>label	: Label at the top of Grid  
+>label_extra	: Extra Info below Label  
+>counterString	: Counter String ( default: Showing records %s — %s of %s )  
+>headerCounter  : Enable/Disable Header Counter ( default: true)  
+>footerCounter  : Enable/Disable Footer Counter ( default: true)  
+>
+
+### Functions
+```php
+$grid->setProvider($provider);  
+$grid->setLabelButton($label = 'New', $route = '');
+$grid->orderBy($col,$dir);
+$grid->setTotal($count);
+$grid->setIPsortable($name);
+$grid->addColumn($name = 'id', $label = 'id',$filter = false, $sortable = false, $ValueCalculator = null, $ValueFormatter = null);
+$grid->addFilter($name = 'id', $label = 'id', $operator = 'like', $options = null);
+$grid->addFilterSelect($name = 'id', $label = 'id', $options = []);
+$grid->addActionColumn($col = 'id', $active = false, $inverse = false);
+$grid->addActionButton($type = 'default', $title='', $route = '/', $conditions = [], $colid = null);
+```
+
+### When finished do bellow
+```php
+$grid = $grid->render();
+```
+>the above step will generate an html code
+
+### Static Function
+```php
+\BewarHizirvan\LaravelGrid\LaravelGrid::addContextMenu($value = '', $title = ['name'=>'','value'=>''], $rows = [], $right=false);
+```
+
+### Constants
+```php
+\BewarHizirvan\LaravelGrid\LaravelGrid::PARENT;
+\BewarHizirvan\LaravelGrid\LaravelGrid::SUBMENU;
+\BewarHizirvan\LaravelGrid\LaravelGrid::OK;
+\BewarHizirvan\LaravelGrid\LaravelGrid::NOTOK;
+\BewarHizirvan\LaravelGrid\LaravelGrid::ENABLED;
+\BewarHizirvan\LaravelGrid\LaravelGrid::DISABLED;
+```
 
 ## Change log
 
@@ -23,17 +74,13 @@ Please see the [changelog](changelog.md) for more information on what has change
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
 ## Contributing
 
 Please see [contributing.md](contributing.md) for details and a todolist.
-
-## Security
-
-If you discover any security related issues, please email bewar@hizirvan.email instead of using the issue tracker.
 
 ## Credits
 

@@ -1,13 +1,13 @@
 <div class="card">
     <!-- Card header -->
-    <div class="card-header border-0">
+    <div class="card-header border-0" style="text-align:center">
         <div class="row">
             <div class="col-7">
-                @if(isset($label))
-                    <h3 class="mb-0">{!! $label !!}</h3>
+                @if(!is_null($grid['label']))
+                    <h3 class="mb-0">{!! $grid['label'] !!}</h3>
                 @endif
             </div>
-            @if( isset($grid['label_extra']) && !empty($grid['label_extra']) )
+            @if( !is_null($grid['label_extra']) )
                 <div class="col-3">
                     {!! $grid['label_extra'] !!}
                 </div>
@@ -15,13 +15,13 @@
         </div>
     </div>
     <!-- Light table -->
-    <div class="table-responsive">
+    <div class="table-responsive" dir="{{ ($grid['dir'] == "left")?"ltr":"rtl" }}">
         <form class="form-inline">
-            <table class="table align-items-center table-flush table-striped" style="text-align:right">
+            <table class="table align-items-center table-flush table-striped" style="text-align:{{ $grid['dir'] }}">
                 <thead class="thead-light">
                 @if(isset($grid['header_filters']) && !empty($grid['header_filters']) )
                     <!-- Filters -->
-                    <tr style="text-align:right">
+                    <tr style="text-align:{{ $grid['dir'] }}">
                         <td colspan="{{ $grid['header_colspan'] }}">
                         <span style="margin:4px;line-height:3">
                             @foreach($grid['header_filters'] as $filter)
@@ -63,7 +63,7 @@
                 @endif
                 @if(isset($grid['header_counter'])  && !empty($grid['header_counter']) )
                     <!-- Counter -->
-                    <tr style="text-align:left">
+                    <tr style="text-align:{{ ($grid['dir'] == "left")?"right":"left" }}">
                         <th colspan="{{ $grid['header_colspan'] }}">{{ $grid['header_counter'] }}</th>
                     </tr>
                     <!-- Counter end -->
@@ -108,8 +108,8 @@
                 @if(isset($grid['footer_counter'])  && !empty($grid['footer_counter']) )
                     <tfoot>
                     <!-- Counter -->
-                    <tr style="text-align:left">
-                        <th colspan="{{ $grid['header_colspan'] }}">{{ $grid['header_counter'] }}</th>
+                    <tr style="text-align:{{ ($grid['dir'] == "left")?"right":"left" }}">
+                        <th colspan="{{ $grid['header_colspan'] }}">{{ $grid['footer_counter'] }}</th>
                     </tr>
                     <!-- Counter end -->
                     </tfoot>

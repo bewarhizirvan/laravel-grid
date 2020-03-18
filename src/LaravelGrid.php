@@ -11,6 +11,9 @@ class LaravelGrid
     // Build wonderful things
     protected $provider;
     protected $with;
+    protected $dir = 'left';
+    protected $label = null;
+    protected $label_extra = null;
     protected $cfg = [];
     protected $filters = [];
     protected $firstCol = '';
@@ -30,6 +33,7 @@ class LaravelGrid
     protected $labelButton = null;
     protected $Tabs10 = "\t\t\t\t\t\t\t\t\t\t";
     protected $Tabs8 = "\t\t\t\t\t\t\t\t";
+    protected $counterString = "Showing records %s — %s of %s";
 
     const PARENT = '<span style="color:ForestGreen">Parent</span>';
     const SUBMENU = '<span style="color:LightCoral">SubMenu</span>';
@@ -44,6 +48,12 @@ class LaravelGrid
         if(isset($parameters['checkClass'])) $this->CheckUser = $parameters['checkClass'];
         if(isset($parameters['paginate'])) $this->paginate = $parameters['paginate'];
         if(isset($parameters['provider'])) $this->provider = $parameters['provider'];
+        if(isset($parameters['dir'])) $this->dir = $parameters['dir'];
+        if(isset($parameters['label'])) $this->label = $parameters['label'];
+        if(isset($parameters['label_extra'])) $this->label_extra = $parameters['label_extra'];
+        if(isset($parameters['counterString'])) $this->counterString = $parameters['counterString'];
+        if(isset($parameters['headerCounter'])) $this->headerCounter = $parameters['headerCounter'];
+        if(isset($parameters['footerCounter'])) $this->footerCounter = $parameters['footerCounter'];
     }
 
     public function setProvider($provider)
@@ -54,19 +64,6 @@ class LaravelGrid
     public function setLabelButton($label = 'New', $route = '')
     {
         $this->labelButton = "<a href=\"$route\" class=\"btn btn-primary\">$label</a>";
-    }
-
-    public function setConfig($config = [])
-    {
-        if(isset($config['headerCounter']))
-            $this->headerCounter = $config['headerCounter'];
-        if(isset($config['footerCounter']))
-            $this->footerCounter = $config['footerCounter'];
-        if(isset($config['paginateRight']))
-            $this->paginateClass = 'justify-content-end';
-        if(isset($config['paginateClass']))
-            $this->paginateClass = $config['paginateClass'];
-
     }
 
     public function orderBy($col,$dir)
@@ -796,7 +793,7 @@ class LaravelGrid
         $showing_mid = (($this->paginate < $count)?$this->paginate:$count);
         $showing_max = (((($page_number>0)?$page_number:1)-1)*$this->paginate)+$showing_mid;
         $showing_max = ($showing_max < $count )?$showing_max:$count;
-        return "Showing records $showing_min — $showing_max of $count";
+        return sprintf($this->counterString,$showing_min, $showing_max, $count);
 
     }
 
@@ -966,11 +963,14 @@ class LaravelGrid
         $grid = [];
         $this->ActionColumnRender();
         $header_colspan = count($this->cfg);
+        $grid['dir'] = $this->dir;
+        $grid['label'] = $this->label;
+        $grid['label_extra'] = $this->label_extra;
         $grid['header_colspan'] = $header_colspan;
-        $grid['header_counter'] = $this->counterHTML();
+        $grid['header_counter'] = ($this->headerCounter)?$this->counterHTML():null;
         $grid['header_titles'] = $this->titlesHTML();
         $grid['header_filters'] = $this->filtersHTML();
-        $grid['footer_counter'] = $this->counterHTML();
+        $grid['footer_counter'] = ($this->footerCounter)?$this->counterHTML():null;
         $grid['tbody'] = $this->tbodyHTML();
         $grid['pagination'] = $this->paginationHTML();
         if(!is_null($this->labelButton)) $grid['label_extra'] = $this->labelButton;

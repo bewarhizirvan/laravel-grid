@@ -45,7 +45,7 @@ class LaravelGrid
     public function __construct($parameters = [])
     {
         $this->input = request();
-        if(isset($parameters['checkClass'])) $this->CheckUser = $parameters['checkClass'];
+        if(isset($parameters['checkClass'])) $this->CheckPerm = $parameters['checkClass'];
         if(isset($parameters['paginate'])) $this->paginate = $parameters['paginate'];
         if(isset($parameters['provider'])) $this->provider = $parameters['provider'];
         if(isset($parameters['dir'])) $this->dir = $parameters['dir'];
@@ -238,8 +238,14 @@ class LaravelGrid
                 break;
 
             case 'print':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"window.open('%s', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=500,left=500,width=1200,height=600');\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"window.open('%s', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=400,left=500,width=850,height=900');\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-print\"></i>".PHP_EOL
+                    .$this->Tabs10."	</button>".PHP_EOL;
+                break;
+
+            case 'pdf':
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"window.open('%s', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=500,left=500,width=1200,height=600');\">".PHP_EOL
+                    .$this->Tabs10."		<i class=\"fas fa-file-pdf\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
 
@@ -299,6 +305,12 @@ class LaravelGrid
 
             case 'disable':
                 $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"document.location.href='%s'\">".PHP_EOL
+                    .$this->Tabs10."		<i class=\"fas fa-lock\"></i>".PHP_EOL
+                    .$this->Tabs10."	</button>".PHP_EOL;
+                break;
+
+            case 'disableConfirm':
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('db.disable')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-lock\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;

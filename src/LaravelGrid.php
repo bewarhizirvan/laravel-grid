@@ -243,6 +243,12 @@ class LaravelGrid
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
 
+            case 'printA5':
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"window.open('%s', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=400,left=500,width=600,height=850');\">".PHP_EOL
+                    .$this->Tabs10."		<i class=\"fas fa-print\"></i>".PHP_EOL
+                    .$this->Tabs10."	</button>".PHP_EOL;
+                break;
+
             case 'pdf':
                 $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"window.open('%s', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=500,left=500,width=1200,height=600');\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-file-pdf\"></i>".PHP_EOL

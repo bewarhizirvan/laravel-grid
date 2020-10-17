@@ -63,7 +63,7 @@
                 @endif
                 @if(isset($grid['header_counter'])  && !empty($grid['header_counter']) )
                     <!-- Counter -->
-                    <tr class="header-counter" style="text-align:{{ ($grid['dir'] == "left")?"right":"left" }}">
+                    <tr class="header-counter {{ ($grid['dir'] == "left")?"text-right":"text-left" }}" style="text-align:{{ ($grid['dir'] == "left")?"right":"left" }}">
                         <th colspan="{{ $grid['header_colspan'] }}">{{ $grid['header_counter'] }}</th>
                     </tr>
                     <!-- Counter end -->
@@ -108,7 +108,7 @@
                 @if(isset($grid['footer_counter'])  && !empty($grid['footer_counter']) )
                     <tfoot>
                     <!-- Counter -->
-                    <tr class="footer-counter" style="text-align:{{ ($grid['dir'] == "left")?"right":"left" }}">
+                    <tr class="footer-counter {{ ($grid['dir'] == "left")?"text-right":"text-left" }}" style="text-align:{{ ($grid['dir'] == "left")?"right":"left" }}">
                         <th colspan="{{ $grid['header_colspan'] }}">{{ $grid['footer_counter'] }}</th>
                     </tr>
                     <!-- Counter end -->

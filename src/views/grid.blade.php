@@ -47,7 +47,7 @@
                                     @endif
                             </span>
                             @endforeach
-                            <button style="margin:0px;" type="reset"
+                            <button type="reset"
                                     onclick="var form = jQuery(this).parents().filter(&quot;form&quot;);form.find(&quot;input:not([type=&#039;submit&#039;]), select&quot;).val(&quot;&quot;);return false;"
                                     class=" btn btn-sm btn-warning">
                                 <i class="fas fa-eraser"></i>&nbsp;{{ trans('db.filter_reset') }}

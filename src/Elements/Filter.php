@@ -11,14 +11,16 @@ class Filter
     protected $label = 'id';
     protected $operator = 'like';
     protected $options = null;
+    protected $evaluate = true;
     protected $value = null;
 
-    public function __construct($name, $label, $operator = 'like', $options = null)
+    public function __construct($name, $label, $operator = 'like', $options = null, $evaluate = true)
     {
         $this->name = $name;
         $this->label = $label;
         $this->operator = $operator;
         $this->options = $options;
+        $this->evaluate = $evaluate;
     }
 
     public function setValue($value)
@@ -50,4 +52,10 @@ class Filter
     {
         return $this->options;
     }
+    
+    public function getEvaluate()
+    {
+        return $this->evaluate;
+    }
+
 }

@@ -128,17 +128,17 @@ class LaravelGrid
         if($sortable) $col->setSortable();
     }
 
-    public function addFilter($name = 'id', $label = 'id', $operator = 'like', $options = null)
+    public function addFilter($name = 'id', $label = 'id', $operator = 'like', $options = null, $evaluate = true)
     {
-        $filter = new Filter($name, $label, $operator, $options);
+        $filter = new Filter($name, $label, $operator, $options, $evaluate);
         $value = $this->input->input(str_replace('.','_',$name));
         $filter->setValue($value);
         $this->filters[] = $filter;
     }
 
-    public function addFilterSelect($name = 'id', $label = 'id', $options = [])
+    public function addFilterSelect($name = 'id', $label = 'id', $options = [], $evaluate = true)
     {
-        //$this->filters[] = new Filter($name, $label, '=', $options = []);
+        //$this->filters[] = new Filter($name, $label, '=', $options = [], $evaluate);
         $filter = new Filter($name, $label, '=', $options);
         $value = $this->input->input(str_replace('.','_',$name));
         $filter->setValue($value);
@@ -691,7 +691,7 @@ class LaravelGrid
             $getId = str_replace('.','_',$filter->getName());
             //echo $getId; echo $input->input($getId);
             $names_array = explode(".", $filter->getName());
-            if($input->input($getId) !== null && $input->input($getId) != "")
+            if($input->input($getId) !== null && $input->input($getId) != "" && $filter->getEvaluate())
             {
                 if(count($names_array) == 3)
                 {

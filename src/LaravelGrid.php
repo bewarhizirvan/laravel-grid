@@ -139,7 +139,7 @@ class LaravelGrid
     public function addFilterSelect($name = 'id', $label = 'id', $options = [], $evaluate = true)
     {
         //$this->filters[] = new Filter($name, $label, '=', $options = [], $evaluate);
-        $filter = new Filter($name, $label, '=', $options);
+        $filter = new Filter($name, $label, '=', $options, $evaluate);
         $value = $this->input->input(str_replace('.','_',$name));
         $filter->setValue($value);
         $this->filters[] = $filter;

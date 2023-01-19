@@ -2,7 +2,7 @@
     <!-- Card header -->
     <div class="card-header border-0" style="text-align:center">
         <div class="row">
-            <div class="col-7">
+            <div class="{{ !is_null($grid['label_extra'])? "col-7" : "col-12"  }}">
                 @if(!is_null($grid['label']))
                     <h3 class="mb-0">{!! $grid['label'] !!}</h3>
                 @endif

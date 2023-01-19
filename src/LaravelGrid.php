@@ -771,6 +771,7 @@ class LaravelGrid
                             $fvalue = $input->input($getId);
                             $query = $query->filter(function ($item) use ($fname, $fvalue)
                             {
+                                if(is_array($item)) $item = (object)$item;
                                 if(isset($item->$fname))
                                     return false !== stristr($item->$fname, $fvalue);
                                 else

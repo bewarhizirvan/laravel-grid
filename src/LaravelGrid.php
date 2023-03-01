@@ -333,6 +333,12 @@ class LaravelGrid
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
 
+            case 'controlConfirm':
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('"._('Confirm')."')) location.href='%s'\">".PHP_EOL
+                    .$this->Tabs10."		<i class=\"fas fa-check\"></i>".PHP_EOL
+                    .$this->Tabs10."	</button>".PHP_EOL;
+                break;
+
             case 'session':
                 $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"document.location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-times-circle\"></i>".PHP_EOL

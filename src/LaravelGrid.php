@@ -424,6 +424,7 @@ class LaravelGrid
                 $buttonAttr = "title='%s' style='$style'";
                 break;
 
+            case 'blank':
             case '_blank':
                 $buttonAttr = "title='$title' onClick=\"window.open('%s', '_blank');\"";
                 break;

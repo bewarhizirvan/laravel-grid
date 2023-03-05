@@ -399,6 +399,65 @@ class LaravelGrid
 
     }
 
+    public function addActionButtonBuilder(callable|string $route = '/', string|array $fa_icon = "fas fa-edit", string $title = '', string|array $onClickType = 'href', $conditions = [], $colid = null)
+    {
+        $classExtra = '';
+
+        switch ($onClickType)
+        {
+            case (is_array($onClickType) && $onClickType[0] == 'popup'):
+                $top = $onClickType[1] ?? 0;
+                $left = $onClickType[2] ?? 0;
+                $width = $onClickType[3] ?? 800;
+                $height = $onClickType[4] ?? 500;
+                $buttonAttr = "title='$title' onClick=\"window.open('%s', '_blank', 'toolbar=no,scrollbars=yes,resizable=yes,top=$top,left=$left,width=$width,height=$height');\"";
+                break;
+
+            case (is_array($onClickType) && $onClickType[0] == 'confirm'):
+                $message = $onClickType[1] ?? 'Confirm Action?';
+                $buttonAttr = "title='$title' onClick=\"if(confirm('$message')) location.href='%s'\"";
+                break;
+
+            case (is_array($onClickType) && $onClickType[0] == 'disabled'):
+                $classExtra = $onClickType[1] ?? 'disabled-request-button';
+                $style = $onClickType[2] ?? 'background-color: LightCoral;';
+                $buttonAttr = "title='%s' style='$style'";
+                break;
+
+            case '_blank':
+                $buttonAttr = "title='$title' onClick=\"window.open('%s', '_blank');\"";
+                break;
+
+            default:
+                $buttonAttr = "title='$title' onClick=\"document.location.href='%s'\"";
+        }
+        if (is_array($fa_icon))
+        {
+            $iconHtml =
+                "<button type='button' class='btn btn-default btn-xs $classExtra' $buttonAttr>".PHP_EOL
+                ."    <span class='fa-layers'>".PHP_EOL
+                ."       <i class='{$fa_icon[0]}'></i>".PHP_EOL
+                ."      <span class='fa-layers-text fa-inverse' data-fa-transform='shrink-3 up-3 left-12'>{$fa_icon[1]}</span>".PHP_EOL
+                ." </span>".PHP_EOL
+                ."</button>".PHP_EOL;
+        }
+        else
+        {
+            $iconHtml =
+                "<button type='button' class='btn btn-default btn-xs $classExtra' $buttonAttr>".PHP_EOL
+                ."  <i class='$fa_icon'></i>".PHP_EOL
+                ."</button>".PHP_EOL;
+        }
+
+        $this->actionColString[] = [
+            'title' => $title,
+            'route' => $route,
+            'icon' => $iconHtml,
+            'conditions' => $conditions,
+            'colid' => $colid
+        ];
+    }
+
     public static function addContextMenu($value = '', $title = ['name'=>'','value'=>''], $rows = [], $right=false)
     {
         $result = PHP_EOL.'										<div class="thumbs" onClick="javascript:showDetails($(this));" onmouseleave="javascript:hideDetails($(this));" ondblclick="javascript:copyTextToClipboard(\''.htmlspecialchars($value).'\');">'.PHP_EOL

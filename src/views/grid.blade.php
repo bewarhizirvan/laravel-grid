@@ -21,8 +21,8 @@
                 <thead class="thead-light">
                 @if(isset($grid['header_filters']) && !empty($grid['header_filters']) )
                     <!-- Filters -->
-                    <tr style="text-align:{{ $grid['dir'] }}">
-                        <td colspan="{{ $grid['header_colspan'] }}">
+                    <tr class="t1" style="text-align:{{ $grid['dir'] }}">
+                        <td class="t1" colspan="{{ $grid['header_colspan'] }}">
                         <span style="margin:4px;line-height:3">
                             @foreach($grid['header_filters'] as $filter)
                                 <span data-role="control-container" data-control="filter">

@@ -593,8 +593,11 @@ class LaravelGrid
                                 if(count($relate)==1)
                                     $ar[$key] = $row->$val;
                                 else
-                                    $ar[$key] = $row->$relate[0]->$relate[1];
-
+                                { 
+                                    $relate0 = $relate[0]; 
+                                    $relate1 = $relate[1]; 
+                                    $ar[$key] = $row->$relate0->$relate1; 
+                                }
                             }
                             $col .= sprintf($btn['icon'], route($btn['route'],$ar));
                         }else

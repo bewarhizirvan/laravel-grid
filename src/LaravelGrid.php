@@ -593,10 +593,10 @@ class LaravelGrid
                                 if(count($relate)==1)
                                     $ar[$key] = $row->$val;
                                 else
-                                { 
-                                    $relate0 = $relate[0]; 
-                                    $relate1 = $relate[1]; 
-                                    $ar[$key] = $row->$relate0->$relate1; 
+                                {
+                                    $relate0 = $relate[0];
+                                    $relate1 = $relate[1];
+                                    $ar[$key] = $row->$relate0->$relate1;
                                     
                                 }
                             }

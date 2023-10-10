@@ -15,7 +15,7 @@
         </div>
     </div>
     <!-- Light table -->
-    <div class="{{ $grid['div_class'] ?? 'table-responsive-md' }}" dir="{{ ($grid['dir'] == "left")?"ltr":"rtl" }}" id="{{ $grid['div_id'] ?? 'table-responsive-md' }}>
+    <div class="{{ $grid['div_class'] ?? 'table-responsive-md' }}" dir="{{ ($grid['dir'] == "left")?"ltr":"rtl" }}" id="{{ $grid['div_id'] ?? 'table-responsive-md' }}">
         <form class="form-inline">
             <table class="table align-items-center table-flush table-striped" style="text-align:{{ $grid['dir'] }}">
                 <thead class="thead-light">

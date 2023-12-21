@@ -1,6 +1,6 @@
-<div class="card rounded overflow-hidden">
+<div class="card">
     <!-- Card header -->
-    <div class="card-header border-0 px-6 py-4" style="text-align:center">
+    <div class="card-header border-0" style="text-align:center">
         <div class="row">
             <div class="{{ !is_null($grid['label_extra'])? "col-7" : "col-12"  }}">
                 @if(!is_null($grid['label']))
@@ -15,15 +15,15 @@
         </div>
     </div>
     <!-- Light table -->
-    <div class="{{ $grid['div_class'] ?? 'table-responsive-md table-auto px-6 py-4' }}" dir="{{ ($grid['dir'] == "left")?"ltr":"rtl" }}" id="{{ $grid['div_id'] ?? 'table-responsive-md' }}">
+    <div class="{{ $grid['div_class'] ?? 'table-responsive-md' }}" dir="{{ ($grid['dir'] == "left")?"ltr":"rtl" }}" id="{{ $grid['div_id'] ?? 'table-responsive-md' }}">
         <form class="form-inline">
-            <table class="table align-items-center table-flush table-striped table-auto border-collapse w-full" style="text-align:{{ $grid['dir'] }}">
+            <table class="table align-items-center table-flush table-striped" style="text-align:{{ $grid['dir'] }}">
                 <thead class="thead-light">
                 @if(isset($grid['header_filters']) && !empty($grid['header_filters']) )
                     <!-- Filters -->
                     <tr class="t1" style="text-align:{{ $grid['dir'] }}">
                         <td class="t1" colspan="{{ $grid['header_colspan'] }}">
-                        <span style="margin:4px;line-height:3" class="h-8">
+                        <span style="margin:4px;line-height:3">
                             @foreach($grid['header_filters'] as $filter)
                                 <span data-role="control-container" data-control="filter">
                                 <label class="sr-only"></label>&nbsp;
@@ -49,12 +49,12 @@
                             @endforeach
                             <button type="reset"
                                     onclick="var form = jQuery(this).parents().filter(&quot;form&quot;);form.find(&quot;input:not([type=&#039;submit&#039;]), select&quot;).val(&quot;&quot;);return false;"
-                                    class="btn btn-sm btn-warning bg-orange-300 hover:bg-orange-400 font-bold py-0 px-4 rounded">
-                                <i class="fas fa-eraser"></i>&nbsp;{{ __('Reset') }}
+                                    class=" btn btn-sm btn-warning">
+                                <i class="fas fa-eraser"></i>&nbsp;{{ trans('db.filter_reset') }}
                             </button>
                             <button type="submit" data-role="managed_list_submit_button"
-                                    class="btn btn-sm btn-success bg-green-500 hover:bg-green-600 font-bold py-0 px-4 rounded">
-                                <i class="fas fa-search"></i>&nbsp;{{ __('Submit') }}
+                                    class=" btn btn-sm btn-success">
+                                <i class="fas fa-search"></i>&nbsp;{{ trans('db.filter_submit') }}
                             </button>
                         </span>
                         </td>
@@ -70,9 +70,9 @@
                 @endif
                 @if(isset($grid['header_titles'])  && !empty($grid['header_titles']) )
                     <!-- Title -->
-                    <tr class="bg-blue-400">
+                    <tr>
                         @foreach($grid['header_titles'] as $title)
-                            <th class="border-l border-transparent py-4 px-3 text-lg font-medium text-white {{ $title['class'] }}">
+                            <th class=" {{ $title['class'] }}">
                                 {{ $title['value'] }}
                                 @if(isset($title['sortable']) && $title['sortable'] )
                                     <small style="white-space: nowrap">
@@ -96,7 +96,7 @@
                     @foreach($grid['tbody'] as $row)
                         <tr>
                             @foreach($row as $col)
-                                <td data-title="{{ $col['label'] }}" class="text-dark border-b border-[#E8E8E8] bg-white dark:border-dark dark:bg-dark-2 dark:text-dark-7 py-5 px-2 text-base font-medium {{ $col['class'] }}">
+                                <td data-title="{{ $col['label'] }}" class="{{ $col['class'] }}">
                                     {!! $col['value'] !!}
                                 </td>
                             @endforeach
@@ -117,39 +117,39 @@
             </table>
         </form>
         @if(isset($grid['pagination'])  && !empty($grid['pagination']) )
-            <nav class="">
-                <ul class="pagination -mx-[6px] flex items-center">
+            <nav>
+                <ul class="pagination">
                     {{-- First Page Link --}}
                     @if ($grid['pagination']['firstPageUrl'] != null)
                         <li class="page-item">
-                            <a class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" href="{{ $grid['pagination']['firstPageUrl'] }}" rel="first"
+                            <a class="page-link" href="{{ $grid['pagination']['firstPageUrl'] }}" rel="first"
                                aria-label="@lang('pagination.first')">&lsaquo;&lsaquo;</a>
                         </li>
                     @endif
                     {{-- Previous Page Link --}}
                     @if ($grid['pagination']['onFirstPage'])
                         <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                            <span class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" aria-hidden="true">&lsaquo;</span>
+                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
                         </li>
                     @else
                         <li class="page-item">
-                            <a class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" href="{{ $grid['pagination']['previousPageUrl'] }}" rel="prev"
+                            <a class="page-link" href="{{ $grid['pagination']['previousPageUrl'] }}" rel="prev"
                                aria-label="@lang('pagination.previous')">&lsaquo;</a>
                         </li>
                     @endif
                     {{-- Pagination Elements --}}
                     @foreach ($grid['pagination']['links'] as $element)
                         @if (is_string($element))
-                            <li class="page-item disabled flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" aria-disabled="true"><span
-                                    class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color">{{ $element }}</span></li>
+                            <li class="page-item disabled" aria-disabled="true"><span
+                                    class="page-link">{{ $element }}</span></li>
                         @endif
                         @if (is_array($element))
                             @foreach ($element as $page => $url)
                                 @if ($page == $grid['pagination']['currentPage'])
                                     <li class="page-item active" aria-current="page"><span
-                                            class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color">{{ $page }}</span></li>
+                                            class="page-link">{{ $page }}</span></li>
                                 @else
-                                    <li class="page-item"><a class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" href="{{ $url }}">{{ $page }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
                                 @endif
                             @endforeach
                         @endif
@@ -157,18 +157,18 @@
                     {{-- Next Page Link --}}
                     @if ($grid['pagination']['hasMorePages'])
                         <li class="page-item">
-                            <a class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" href="{{ $grid['pagination']['nextPageUrl'] }}" rel="next"
+                            <a class="page-link" href="{{ $grid['pagination']['nextPageUrl'] }}" rel="next"
                                aria-label="@lang('pagination.next')">&rsaquo;</a>
                         </li>
                     @else
                         <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                            <span class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" aria-hidden="true">&rsaquo;</span>
+                            <span class="page-link" aria-hidden="true">&rsaquo;</span>
                         </li>
                     @endif
                     {{-- Last Page Link --}}
                     @if ($grid['pagination']['lastPageUrl'] != null)
                         <li class="page-item">
-                            <a class="page-link flex items-center justify-center text-base bg-transparent border rounded-md hover:border-primary hover:bg-primary h-9 w-9 border-stroke dark:border-dark-3 text-body-color" href="{{ $grid['pagination']['lastPageUrl'] }}" rel="last"
+                            <a class="page-link" href="{{ $grid['pagination']['lastPageUrl'] }}" rel="last"
                                aria-label="@lang('pagination.last')">&rsaquo;&rsaquo;</a>
                         </li>
                     @endif

@@ -150,7 +150,7 @@ class LaravelGrid
         $this->addColumn($name,trans('Branch'));
         if($filter)
         {
-            $branchs = [''=>_('Branch').': -'];
+            $branchs = [''=>trans('Branch').': -'];
             if(!$this->CheckUser->can('list_all_branch') && $this->CheckUser->can('list_all_callcenter',false))
                 $branchs += Branch::WhereIn('branchid',[1,2])->orderBy('name')->pluck('name','branchid')->toarray();
             elseif( !( $this->CheckUser->can('list_all_branch') || $this->CheckUser->can('list_all') ) )
@@ -160,8 +160,8 @@ class LaravelGrid
             else
                 $branchs += Branch::orderBy('name')->pluck('name','branchid')->toarray();
             $name_array = explode('.',$name);
-            if(count($name_array)==2) $this->addFilter('branchid', _('Branch'),'=',$branchs);
-            elseif(count($name_array)==3) $this->addFilter("$name_array[0].branchid", _('Branch'),'=',$branchs);
+            if(count($name_array)==2) $this->addFilter('branchid', trans('Branch'),'=',$branchs);
+            elseif(count($name_array)==3) $this->addFilter("$name_array[0].branchid", trans('Branch'),'=',$branchs);
         }
 
     }
@@ -292,13 +292,13 @@ class LaravelGrid
                 break;
 
             case 'dormant':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('"._('Make Dormant')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Make Dormant')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-recycle\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
 
             case 'undormant':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('"._('Make unDormant')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Make unDormant')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-undo\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
@@ -316,7 +316,7 @@ class LaravelGrid
                 break;
 
             case 'disableConfirm':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('"._('Disable')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Disable')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-lock\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
@@ -334,7 +334,7 @@ class LaravelGrid
                 break;
 
             case 'controlConfirm':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('"._('Confirm')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Confirm')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-check\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
@@ -620,7 +620,7 @@ class LaravelGrid
                 return $col;
 
             };
-            $this->addColumn('action',_('Action'), null,null,$action_func);
+            $this->addColumn('action',trans('Action'), null,null,$action_func);
 
         }
 

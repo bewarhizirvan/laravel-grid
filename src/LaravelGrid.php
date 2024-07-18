@@ -147,10 +147,10 @@ class LaravelGrid
 
     public function addColumnBranch($name = 'branch.name', $filter = true)
     {
-        $this->addColumn($name,trans('Branch'));
+        $this->addColumn($name,__('Branch'));
         if($filter)
         {
-            $branchs = [''=>trans('Branch').': -'];
+            $branchs = [''=>__('Branch').': -'];
             if(!$this->CheckUser->can('list_all_branch') && $this->CheckUser->can('list_all_callcenter',false))
                 $branchs += Branch::WhereIn('branchid',[1,2])->orderBy('name')->pluck('name','branchid')->toarray();
             elseif( !( $this->CheckUser->can('list_all_branch') || $this->CheckUser->can('list_all') ) )
@@ -160,8 +160,8 @@ class LaravelGrid
             else
                 $branchs += Branch::orderBy('name')->pluck('name','branchid')->toarray();
             $name_array = explode('.',$name);
-            if(count($name_array)==2) $this->addFilter('branchid', trans('Branch'),'=',$branchs);
-            elseif(count($name_array)==3) $this->addFilter("$name_array[0].branchid", trans('Branch'),'=',$branchs);
+            if(count($name_array)==2) $this->addFilter('branchid', __('Branch'),'=',$branchs);
+            elseif(count($name_array)==3) $this->addFilter("$name_array[0].branchid", __('Branch'),'=',$branchs);
         }
 
     }
@@ -292,13 +292,13 @@ class LaravelGrid
                 break;
 
             case 'dormant':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Make Dormant')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".__('Make Dormant')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-recycle\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
 
             case 'undormant':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Make unDormant')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".__('Make unDormant')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-undo\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
@@ -316,7 +316,7 @@ class LaravelGrid
                 break;
 
             case 'disableConfirm':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Disable')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".__('Disable')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-lock\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
@@ -334,7 +334,7 @@ class LaravelGrid
                 break;
 
             case 'controlConfirm':
-                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".trans('Confirm')."')) location.href='%s'\">".PHP_EOL
+                $icon = $this->Tabs10."	<button type=\"button\" class=\"btn btn-default btn-xs\" title=\"".$title."\" onClick=\"if(confirm('".__('Confirm')."')) location.href='%s'\">".PHP_EOL
                     .$this->Tabs10."		<i class=\"fas fa-check\"></i>".PHP_EOL
                     .$this->Tabs10."	</button>".PHP_EOL;
                 break;
@@ -620,7 +620,7 @@ class LaravelGrid
                 return $col;
 
             };
-            $this->addColumn('action',trans('Action'), null,null,$action_func);
+            $this->addColumn('action',__('Action'), null,null,$action_func);
 
         }
 

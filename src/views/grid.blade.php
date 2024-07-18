@@ -50,11 +50,11 @@
                             <button type="reset"
                                     onclick="var form = jQuery(this).parents().filter(&quot;form&quot;);form.find(&quot;input:not([type=&#039;submit&#039;]), select&quot;).val(&quot;&quot;);return false;"
                                     class=" btn btn-sm btn-warning">
-                                <i class="fas fa-eraser"></i>&nbsp;{{ trans('Reset') }}
+                                <i class="fas fa-eraser"></i>&nbsp;{{ __('Reset') }}
                             </button>
                             <button type="submit" data-role="managed_list_submit_button"
                                     class=" btn btn-sm btn-success">
-                                <i class="fas fa-search"></i>&nbsp;{{ trans('Submit') }}
+                                <i class="fas fa-search"></i>&nbsp;{{ __('Submit') }}
                             </button>
                         </span>
                         </td>
@@ -76,10 +76,10 @@
                                 {{ $title['value'] }}
                                 @if(isset($title['sortable']) && $title['sortable'] )
                                     <small style="white-space: nowrap">
-                                        <a title="{{ trans('Ascending') }}"
+                                        <a title="{{ __('Ascending') }}"
                                            style="text-decoration: none; color:dodgerblue;"
                                            href="{{ $title['uri'] }}asc"> &#x25B2; </a>
-                                        <a title="{{ trans('Descending') }}"
+                                        <a title="{{ __('Descending') }}"
                                            style="text-decoration: none; color:dodgerblue;"
                                            href="{{ $title['uri'] }}desc"> &#x25BC; </a>
                                     </small>
